@@ -1,0 +1,98 @@
+﻿
+@model IEnumerable<MiamiBeachPP.Models.SpModel>
+
+@{
+    ViewData["Title"] = "Display Parking Permit By Area";
+}
+
+<h2 class="title-header">Display Parking Permit By Area</h2>
+
+<table class="table">
+
+    <tbody>
+        @foreach (var group in Model.GroupBy(x => x.ParkingAreaName))
+        {
+            <tr class="group-header">
+                <td colspan="6">
+                    <span class="h3">@group.Key</span>
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Id)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LicensePlate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Latitude)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Longitude)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DateCreated)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ParkingAreaTypeDescription)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EffectiveDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ExpirationDate)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Inactive)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </td>
+                </tr>
+
+            foreach (var item in group)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LicensePlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Latitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Longitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateCreated)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParkingAreaTypeDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EffectiveDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExpirationDate)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inactive)
+                    </td>
+
+                    <td>
+                        @if (@ViewBag.data.Trim() == "Admin")
+                        {
+
+                            @Html.ActionLink("Edit", "User", new { id = item.Id })
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

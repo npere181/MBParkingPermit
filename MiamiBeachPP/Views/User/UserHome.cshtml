@@ -1,0 +1,90 @@
+﻿@model List<MiamiBeachPP.Models.SpModel>
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h2 class="title-header">Permit List</h2>
+<form asp-action="UserHome" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by License: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="UserHome">Back to Full List</a>
+        </p>
+        
+    </div>
+</form>
+
+@if (Model != null)
+{
+<table class="table table-striped">
+
+    <tr>
+        <th>Id</th>
+        <th>LicensePlate</th>
+        <th>ParkingAreaName</th>
+        <th>ParkingAreaTypeDescription</th>
+        <th>EffectiveDate</th>
+        <th>ExpirationDate</th>
+        <th>DateCreated</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Inactive</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicensePlate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParkingAreaName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParkingAreaTypeDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExpirationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EffectiveDate)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Latitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Longitude)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inactive)
+                </td>
+
+            <td>
+                @if (@ViewBag.data.Trim() == "Admin")
+                {
+
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                }
+            </td>
+        </tr>
+        }
+
+        <tr></tr>
+    </tbody>
+
+
+</table>
+
+}
+

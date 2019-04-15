@@ -1,0 +1,91 @@
+﻿@model IEnumerable<MiamiBeachPP.Models.SpModel>
+
+@{
+    ViewData["Title"] = "Expiration";
+}
+
+<h2 class="title-header">Display Expiration</h2>
+
+<table class="table">
+    <tbody>
+        @foreach (var group in Model.GroupBy(x => x.Inactive))
+        {
+        <tr class="group-header">
+            <td colspan="6">
+                <span class="h3">
+                    @if (group.Key == true)
+                    {
+                        <p> Active</p>
+                    }
+                    else
+                    {
+                        <p> In-Active</p>
+                    }
+
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th>Id </th>
+            <th>LicensePlate</th>
+            <th>ParkingAreaName</th>
+            <th>ParkingAreaTypeDescription</th>
+            <th>EffectiveDate</th>
+            <th>ExpirationDate</th>
+            <th>DateCreated</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Inactive</th>
+
+        </tr>
+            foreach (var item in group)
+            {
+            
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.LicensePlate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingAreaName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingAreaTypeDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpirationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EffectiveDate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Inactive)
+            </td>
+            <td>
+                @if (@ViewBag.data.Trim() == "Admin")
+                {
+
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                }
+            </td>
+        </tr>
+        }
+    }
+        </tbody>
+    </table>

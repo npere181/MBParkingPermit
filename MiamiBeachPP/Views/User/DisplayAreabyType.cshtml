@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MiamiBeachPP.Models.SpModel>
+
+@{
+    ViewData["Title"] = "DisplayAreabyType";
+}
+
+<h2 class="title-header">Display Area by Type</h2>
+
+<table class="table">
+    <tbody>
+        @foreach (var group in Model.GroupBy(x => x.ParkingAreaTypeDescription))
+        {
+            <tr class="group-header">
+                <td colspan="6">
+                    <span class="h3">@group.Key</span>
+                </td>
+            </tr>
+
+
+            foreach (var item in group.GroupBy(p => p.ParkingAreaName).Select(g => g.First()))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParkingAreaName)
+                    </td>
+
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>
